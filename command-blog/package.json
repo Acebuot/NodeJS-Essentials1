@@ -1,0 +1,19 @@
+{
+  "name": "command-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "inquirer": "^8.0.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "add": "node add-post",
+    "view": "node view-posts",
+    "setup": "node setup"
+  },
+  "author": "",
+  "license": "ISC"
+}
