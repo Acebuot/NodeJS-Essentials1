@@ -14,15 +14,29 @@ router.post('/hash', (req, res, next) =>
     res.json({plainText, hash,});
 });
 
-router.get('/:person/:addMessage', (request, response, next) => 
+router.get('/', (request, response, next) => 
+{
+    // //hello?name=imongmama
+    // const name = request.query.name;
+    response.render('hello', {name : 'There!', addMessage: '', title: 'Hello Title'});
+});
+
+router.get('/:person/', (request, response, next) => 
 {
     // //hello?name=imongmama
     // const name = request.query.name;
 
     // hello/:person
+    
+    const name = request.params.person;
+    response.render('hello', {name, addMessage: '', title: 'Hello Title'});
+});
+
+router.get('/:person/:addMessage', (request, response, next) => 
+{
     const name = request.params.person;
     const addMessage = request.params.addMessage;
-    response.render('hello', {name, addMessage});
+    response.render('hello', {name, addMessage, title: 'Hello Title Greeting'});
 });
 
 module.exports = router;

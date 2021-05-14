@@ -6,4 +6,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/ejs', (req,res,next) =>
+{
+  res.render('ejs-example', {
+    title: '<h1>Sample EJS Template</h1>',
+    showTitle: false,
+    data: ['apples', 'oranges', 'pears', 'kiwi']
+  });
+});
+
 module.exports = router;

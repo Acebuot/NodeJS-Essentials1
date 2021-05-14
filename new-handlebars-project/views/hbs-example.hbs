@@ -1,0 +1,13 @@
+<!--{{#showTitle}}
+    {{{title}}}
+{{/showTitle}}-->
+
+{{#if showTitle}}
+    {{{title}}}
+{{else}}
+    <h1>No Title Given</h1>
+{{/if}}
+
+{{#each data}}
+    <li>{{this}}</li>
+{{/each}}
