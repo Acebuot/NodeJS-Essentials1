@@ -11,11 +11,11 @@ db.serialize(() =>
         if(err) console.log(chalk.red('Problem reading row data'));
         else
         {
-            const {title, author, date, post} = row;
-            console.log(title);
-            console.log(`by: ${author}`);
-            console.log(date);
-            console.log(post);
+                const {title, author, date, post} = row;
+                console.log(title);
+                console.log(`by: ${author}`);
+                console.log(date);
+                console.log(post);
 
             console.log();
         }

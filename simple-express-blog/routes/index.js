@@ -16,18 +16,25 @@ router.get('/view-posts', function(req, res, next) {
   
   db.serialize(() =>
   {
-    const posts = []
-    const stmt = `SELECT * FROM ${config.tableName}`;
-    db.all(stmt, [], (err, rows) =>
+    const posts = [];
+    const stmt = `SELECT title, date, author, post FROM ${config.tableName}`;
+    db.each(stmt, (err, row) =>
     {
-      if (err)
-        throw err;
+      if (err) console.log(err);
+      else
+      {
+        posts.push(row);
+        console.log(posts.length);
+        console.log(posts[0].title);
+      }
 
-      rows.forEach((row) => posts.push(row));
-        
+      console.log(chalk.blue(posts.length));
+      res.render('view-posts', {posts : posts});
     });
 
-    res.render('view-posts', { title: 'View posts', posts : posts});
+    ///if left in, refresh will crash it.
+    //db.close();
+    
   });
   
 });

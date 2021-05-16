@@ -6,3 +6,33 @@ body {
 a {
   color: #00B7FF;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.add-post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-post-form input,
+.add-post-form textarea,
+.add-post-form button{
+  width: 100%;
+}
+
+.add-post-form label{
+  font-weight: 800;
+}
+
+.add-post-form button{
+  background-color: #2958bd;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+
+/* .post{
+  border-bottom: 1px dashed #cacaca;
+} */
