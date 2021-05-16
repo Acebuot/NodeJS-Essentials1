@@ -33,6 +33,20 @@ a {
   padding: 10px;
 }
 
-/* .post{
+.post{
   border-bottom: 1px dashed #cacaca;
-} */
+}
+
+.post h1{
+  color: #2958bd;
+}
+
+.meta{
+  font-size: 10px;
+}
+
+.success{
+  padding: 10px;
+  background-color: #1cc234;
+  color: white;
+}

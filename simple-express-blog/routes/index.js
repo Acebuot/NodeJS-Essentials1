@@ -8,35 +8,52 @@ const db = new sqlite3.Database(config.databaseName);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  const success = req.query.submitted;
+  res.render('index', { title: 'Simple Express Blog', success });
 });
 
-router.get('/view-posts', function(req, res, next) {
-  
-  
+router.get('/posts/:id', (req,res,next) =>
+{
+  const id = req.params.id;
+  const stmt = 
+  `SELECT title, date, author, post 
+  FROM ${config.tableName}
+  WHERE id = ${id}`;
+
   db.serialize(() =>
   {
-    const posts = [];
-    const stmt = `SELECT title, date, author, post FROM ${config.tableName}`;
     db.each(stmt, (err, row) =>
     {
-      if (err) console.log(err);
+      if (err) console.log(chalk.red('Problem reading row'));
       else
       {
-        posts.push(row);
-        console.log(posts.length);
-        console.log(posts[0].title);
+        res.render('view-posts', {title: `view ${row.title}`  ,posts: [row]});
       }
-
-      console.log(chalk.blue(posts.length));
-      res.render('view-posts', {posts : posts});
     });
+  })
 
-    ///if left in, refresh will crash it.
-    //db.close();
-    
+});
+
+router.get('/view-posts', (req, res, next) => {
+  const stmt = `SELECT title, date, author, post FROM ${config.tableName}`;
+  var posts = [];
+
+  db.serialize(() => {
+    db.all(stmt, (err, rows) => {
+      rows.forEach((row) => {
+        posts.push({
+          title: `${row.title}`,
+          date: `${row.date}`,
+          author: `${row.author}`,
+          post: `${row.post}`,
+        });
+      });
+
+      res.render('view-posts', { title: 'view posts', posts });
+    });
   });
-  
+
+  db.close();
 });
 
 router.post('/add-post', (req,res,next) =>
@@ -52,12 +69,12 @@ router.post('/add-post', (req,res,next) =>
   db.serialize(() =>
   {
     db.run(stmt);
-    res.redirect('/');
+    res.redirect('/?submitted=true');
     console.log(chalk.green('Post has been uploaded to the database'));
 
   });
 
-  bd.close();
+  //db.close();
 });
 
 module.exports = router;
