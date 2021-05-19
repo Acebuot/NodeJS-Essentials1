@@ -46,7 +46,8 @@ app.use(session(
     secret: 'test secret',
     resave: false,
     saveUninitialized: false
-  }));
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -61,10 +62,10 @@ passport.use(new LocalStrategy(
       .then(user => 
         {
           //if no user found
-          if (!user) return authCheckDone(null, false);
+          if (!user) return authCheckDone(null, false, {message : "no such user" });
 
           //if user found but password is not same with password in database
-          if(user.password !== password) return authCheckDone(null, false);
+          if(user.password !== password) return authCheckDone(null, false, {message : "invalid password"});
 
           //user found, password correct
           return authCheckDone(null,user);
