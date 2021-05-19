@@ -18,7 +18,7 @@ var loginRouter = require('./routes/login');
 var app = express();
 
 //make connection code in app.js so we don't have to make multiple connections
-MongoClient.connect('mongodb://localhost:27017/blogdb', (err, client) =>
+MongoClient.connect('mongodb://localhost:27017/blogdb', {useUnifiedTopology: true} , (err, client) =>
 {
   if (err) throw err;
   const db = client.db('blogdb');
