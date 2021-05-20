@@ -5,8 +5,8 @@ const passport = require('passport');
 
 router.get('/login', (req, res, next) =>
 {
-
-    const errors = req.query.error || [];
+    //loading without errors
+    const errors = [];
     // outdated course method
     // //array of errors or returns empty array
     // const errors = req.flash().errors || [];
