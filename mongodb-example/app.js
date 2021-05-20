@@ -9,7 +9,7 @@ const MongoClient = require('mongodb').MongoClient;
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
-const flash = require('connect-flash');
+//const flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //use imported packages
-app.use(flash());
+//app.use(flash());
 app.use(session(
   {
     secret: 'test secret',
